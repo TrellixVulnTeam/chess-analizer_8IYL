@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Button } from "react-native";
 import { Chess } from "chess.js";
 
 import Background from "./Background";
@@ -43,26 +43,36 @@ const Board = () => {
     });
   }, [chess, state.player]);
   return (
-    <View style={styles.container}>
-      <Background />
-      {state.board.map((row, y) =>
-        row.map((piece, x) => {
-          if (piece !== null) {
-            return (
-              <Piece
-                key={`${x}-${y}`}
-                id={`${piece.color}${piece.type}` as const}
-                startPosition={{ x, y }}
-                chess={chess}
-                onTurn={onTurn}
-                enabled={state.player === piece.color}
-              />
-            );
-          }
-          return null;
-        })
-      )}
-    </View>
+    <>
+      <View style={styles.container}>
+        <Background />
+        {state.board.map((row, y) =>
+          row.map((piece, x) => {
+            if (piece !== null) {
+              return (
+                <Piece
+                  key={`${x}-${y}`}
+                  id={`${piece.color}${piece.type}` as const}
+                  startPosition={{ x, y }}
+                  chess={chess}
+                  onTurn={onTurn}
+                  enabled={state.player === piece.color}
+                />
+              );
+            }
+            return null;
+          })
+        )}
+      </View>
+      <Button
+        onPress={() => {
+          // this will send the info to a backend
+          // to be saved for later analysis
+          console.log(chess.history());
+        }}
+        title="save the game"
+      />
+    </>
   );
 };
 

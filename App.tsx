@@ -1,6 +1,5 @@
 import React from "react";
 import { LoadAssets } from "./src/components";
-import { Text } from "react-native";
 import Chess, { assets as chessAssets } from "./src/Chess";
 
 const fonts = {
@@ -23,7 +22,6 @@ const App = () => {
   return (
     <LoadAssets assets={assets} fonts={fonts}>
       <Chess />
-      <Text>Do stuff</Text>
     </LoadAssets>
   );
 };
